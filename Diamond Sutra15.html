@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>金剛經 第十五品 持經功德分</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;700&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Noto Serif TC', serif;
+    background: #f5f0e8;
+    min-height: 100vh;
+    color: #2c1a0e;
+  }
+  .header {
+    text-align: center;
+    padding: 30px 20px 20px;
+    border-bottom: 2px solid rgba(140,100,50,0.3);
+    background: rgba(255,250,240,0.9);
+  }
+  .header h1 { font-size: 1.5em; color: #6b3d1e; letter-spacing: 0.3em; margin-bottom: 6px; }
+  .header p { font-size: 0.8em; color: #9a7a5a; letter-spacing: 0.15em; }
+  .nav {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 12px;
+    background: rgba(255,248,235,0.9);
+    border-bottom: 1px solid rgba(140,100,50,0.15);
+  }
+  .nav a {
+    font-size: 0.8em;
+    color: #9a7a5a;
+    text-decoration: none;
+    letter-spacing: 0.1em;
+    padding: 4px 12px;
+    border: 1px solid rgba(140,100,50,0.3);
+    border-radius: 20px;
+    transition: all 0.2s;
+  }
+  .nav a:hover { background: rgba(180,140,60,0.15); color: #6b3d1e; }
+  .main {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    max-width: 1000px;
+    margin: 0 auto;
+    min-height: calc(100vh - 140px);
+  }
+  .left-panel { padding: 30px 25px; border-right: 1px solid rgba(140,100,50,0.25); }
+  .right-panel { padding: 30px 25px; background: rgba(255,252,245,0.5); }
+  .panel-title {
+    font-size: 0.75em; letter-spacing: 0.3em; color: #9a7a5a;
+    margin-bottom: 20px; padding-bottom: 8px;
+    border-bottom: 1px solid rgba(140,100,50,0.2);
+  }
+  .sentence {
+    display: inline; cursor: pointer; line-height: 2.4;
+    font-size: 1em; letter-spacing: 0.05em;
+    transition: background 0.2s; border-radius: 3px; padding: 1px 2px;
+  }
+  .sentence:hover { background: rgba(180,140,60,0.15); }
+  .sentence.active { background: rgba(180,140,60,0.28); color: #6b3d1e; font-weight: 700; }
+  .translation-box { animation: fadeIn 0.4s ease; }
+  @keyframes fadeIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+  .original-ref {
+    font-size: 0.75em; color: #9a7a5a; margin-bottom: 12px;
+    letter-spacing: 0.08em; padding: 6px 10px;
+    background: rgba(180,140,60,0.1);
+    border-left: 3px solid #c8a050; border-radius: 0 4px 4px 0;
+  }
+  .translation-text { font-size: 0.95em; line-height: 2.2; color: #3d2410; letter-spacing: 0.05em; }
+  .hint { color: #b8956a; font-size: 0.85em; line-height: 2.2; letter-spacing: 0.08em; font-style: italic; }
+  .divider { text-align: center; color: rgba(140,100,50,0.4); margin: 12px 0; letter-spacing: 0.5em; }
+  @media (max-width: 600px) {
+    .main { grid-template-columns: 1fr; }
+    .left-panel { border-right: none; border-bottom: 1px solid rgba(140,100,50,0.25); }
+    .nav { flex-wrap: wrap; gap: 10px; }
+  }
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>金剛般若波羅蜜經</h1>
+  <p>第十五品　持經功德分　｜　點擊原文句子，右側顯示白話翻譯</p>
+</div>
+<div class="nav">
+  <a href="Diamond Sutra14.html">← 第十四品</a>
+  <a href="#">第十五品（目前）</a>
+  <a href="Diamond Sutra16.html">第十六品 →</a>
+</div>
+<div class="main">
+  <div class="left-panel">
+    <div class="panel-title">原　文（鳩摩羅什譯）</div>
+    <div id="originalText"></div>
+  </div>
+  <div class="right-panel">
+    <div class="panel-title">白話翻譯</div>
+    <div id="translationArea">
+      <p class="hint">請點擊左側原文中的任何一句，此處即顯示對應的白話解釋。</p>
+    </div>
+  </div>
+</div>
+<script>
+const verses = [
+  {
+    original: "「須菩提！若有善男子、善女人，初日分以恆河沙等身布施，中日分復以恆河沙等身布施，後日分亦以恆河沙等身布施，如是無量百千萬億劫，以身布施；",
+    translation: "「須菩提！如果有善男子、善女人，早上以等同恆河沙數目那麼多次的身命布施，中午也以同樣多次的身命布施，下午又以同樣多次的身命布施，如此經過無量百千萬億個無法計算的劫（極長的時間），一直以身命布施；"
+  },
+  {
+    original: "若復有人，聞此經典，信心不逆，其福勝彼，何況書寫、受持、讀誦、為人解說。",
+    translation: "如果另外有人，聽到這部經典，信心堅定毫不動搖，他所得的福德就超過前者；更何況是書寫、受持、讀誦，以及為他人解說這部經的人，其福德更是無可比擬。"
+  },
+  {
+    original: "須菩提！以要言之，是經有不可思議、不可稱量、無邊功德。",
+    translation: "須菩提！簡要地說，這部經具有不可思議、不可計量、無窮無盡的功德。"
+  },
+  {
+    original: "如來為發大乘者說，為發最上乘者說。",
+    translation: "如來是為了發心修習大乘佛法的人而說這部經，是為了發心修習最高乘法的人而說的。"
+  },
+  {
+    original: "若有人能受持讀誦，廣為人說，如來悉知是人，悉見是人，皆得成就不可量、不可稱、無有邊、不可思議功德。",
+    translation: "如果有人能夠受持讀誦這部經，並廣泛地為他人解說，如來完全了知這樣的人，完全看見這樣的人，這些人都能成就不可量、不可稱、無有邊際、不可思議的功德。"
+  },
+  {
+    original: "如是人等，即為荷擔如來阿耨多羅三藐三菩提。",
+    translation: "這樣的人，就是承擔起如來無上正等正覺（最高智慧）的責任的人。"
+  },
+  {
+    original: "何以故？須菩提！若樂小法者，著我見、人見、眾生見、壽者見，則於此經，不能聽受讀誦、為人解說。",
+    translation: "為什麼呢？須菩提！如果有人喜好小法（較低層次的法門），執著於我見、人見、眾生見、壽者見，那麼對於這部經，就無法聽受讀誦、為人解說。"
+  },
+  {
+    original: "須菩提！在在處處，若有此經，一切世間、天、人、阿修羅，所應供養；",
+    translation: "須菩提！無論在何處，若有這部經在，一切世間的天神、人類、阿修羅，都應當供養這部經；"
+  },
+  {
+    original: "當知此處則為是塔，皆應恭敬，作禮圍繞，以諸華香而散其處。」",
+    translation: "應當知道這個地方就如同佛塔一樣神聖，所有人都應當恭敬禮拜，繞行其周圍，以各種花朵和香料散布在那裡，以示供養。」"
+  }
+];
+
+function renderOriginal() {
+  const container = document.getElementById('originalText');
+  verses.forEach((v, i) => {
+    const span = document.createElement('span');
+    span.className = 'sentence';
+    span.textContent = v.original;
+    span.addEventListener('click', () => selectVerse(i));
+    container.appendChild(span);
+  });
+}
+
+function selectVerse(index) {
+  document.querySelectorAll('.sentence').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.sentence')[index].classList.add('active');
+  const area = document.getElementById('translationArea');
+  area.innerHTML = `
+    <div class="translation-box">
+      <div class="original-ref">原文：${verses[index].original}</div>
+      <div class="divider">✦</div>
+      <div class="translation-text">${verses[index].translation}</div>
+    </div>
+  `;
+}
+
+document.addEventListener('click', (e) => {
+  if (!e.target.classList.contains('sentence') && !e.target.closest('#translationArea')) {
+    document.querySelectorAll('.sentence').forEach(s => s.classList.remove('active'));
+    document.getElementById('translationArea').innerHTML =
+      '<p class="hint">請點擊左側原文中的任何一句，此處即顯示對應的白話解釋。</p>';
+  }
+});
+
+renderOriginal();
+</script>
+</body>
+</html>
