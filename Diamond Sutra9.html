@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>金剛經 第九品 一相無相分</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;700&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Noto Serif TC', serif; background: #f5f0e8; min-height: 100vh; color: #2c1a0e; }
+  .header { text-align: center; padding: 30px 20px 20px; border-bottom: 2px solid rgba(140,100,50,0.3); background: rgba(255,250,240,0.9); }
+  .header h1 { font-size: 1.5em; color: #6b3d1e; letter-spacing: 0.3em; margin-bottom: 6px; }
+  .header p { font-size: 0.8em; color: #9a7a5a; letter-spacing: 0.15em; }
+  .nav { display: flex; justify-content: center; gap: 20px; padding: 12px; background: rgba(255,248,235,0.9); border-bottom: 1px solid rgba(140,100,50,0.15); }
+  .nav a { font-size: 0.8em; color: #9a7a5a; text-decoration: none; letter-spacing: 0.1em; padding: 4px 12px; border: 1px solid rgba(140,100,50,0.3); border-radius: 20px; transition: all 0.2s; }
+  .nav a:hover { background: rgba(180,140,60,0.15); color: #6b3d1e; }
+  .main { display: grid; grid-template-columns: 1fr 1fr; max-width: 1000px; margin: 0 auto; min-height: calc(100vh - 140px); }
+  .left-panel { padding: 30px 25px; border-right: 1px solid rgba(140,100,50,0.25); }
+  .right-panel { padding: 30px 25px; background: rgba(255,252,245,0.5); }
+  .panel-title { font-size: 0.75em; letter-spacing: 0.3em; color: #9a7a5a; margin-bottom: 20px; padding-bottom: 8px; border-bottom: 1px solid rgba(140,100,50,0.2); }
+  .sentence { display: inline; cursor: pointer; line-height: 2.4; font-size: 1em; letter-spacing: 0.05em; transition: background 0.2s; border-radius: 3px; padding: 1px 2px; }
+  .sentence:hover { background: rgba(180,140,60,0.15); }
+  .sentence.active { background: rgba(180,140,60,0.28); color: #6b3d1e; font-weight: 700; }
+  .translation-box { animation: fadeIn 0.4s ease; }
+  @keyframes fadeIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+  .original-ref { font-size: 0.75em; color: #9a7a5a; margin-bottom: 12px; letter-spacing: 0.08em; padding: 6px 10px; background: rgba(180,140,60,0.1); border-left: 3px solid #c8a050; border-radius: 0 4px 4px 0; }
+  .translation-text { font-size: 0.95em; line-height: 2.2; color: #3d2410; letter-spacing: 0.05em; }
+  .hint { color: #b8956a; font-size: 0.85em; line-height: 2.2; letter-spacing: 0.08em; font-style: italic; }
+  .divider { text-align: center; color: rgba(140,100,50,0.4); margin: 12px 0; letter-spacing: 0.5em; }
+  @media (max-width: 600px) { .main { grid-template-columns: 1fr; } .left-panel { border-right: none; border-bottom: 1px solid rgba(140,100,50,0.25); } .nav { flex-wrap: wrap; gap: 10px; } .right-panel { min-height: 300px; } }
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>金剛般若波羅蜜經</h1>
+  <p>第九品　一相無相分　｜　點擊原文句子，右側顯示白話翻譯</p>
+</div>
+<div class="nav">
+  <a href="Diamond Sutra8.html">← 第八品</a>
+  <a href="#">第九品（目前）</a>
+  <a href="Diamond Sutra10.html">第十品 →</a>
+</div>
+<div class="main">
+  <div class="left-panel">
+    <div class="panel-title">原　文（鳩摩羅什譯）</div>
+    <div id="originalText"></div>
+  </div>
+  <div class="right-panel">
+    <div class="panel-title">白話翻譯</div>
+    <div id="translationArea">
+      <p class="hint">請點擊左側原文中的任何一句，此處即顯示對應的白話解釋。</p>
+    </div>
+  </div>
+</div>
+<script>
+const verses = [
+  {
+    original: "「須菩提！於意云何？須陀洹能作是念『我得須陀洹果』不？」須菩提言：「不也，世尊！何以故？須陀洹名為入流，而無所入，不入色聲香味觸法，是名須陀洹。」",
+    translation: "佛問：「須菩提！你認為如何？須陀洹（初果聖人，初入聖流者）能夠生起『我已證得須陀洹果』這樣的念頭嗎？」須菩提說：「不能，世尊！為什麼呢？須陀洹的意思是『入流』（進入聖者之流），但實際上沒有任何可以進入的相，不執著於色、聲、香、味、觸、法六塵，這才叫做須陀洹。」"
+  },
+  {
+    original: "「須菩提！於意云何？斯陀含能作是念『我得斯陀含果』不？」須菩提言：「不也，世尊！何以故？斯陀含名一往來，而實無往來，是名斯陀含。」",
+    translation: "「須菩提！你認為如何？斯陀含（二果聖人，只需再往返人天一次）能生起『我已得斯陀含果』的念頭嗎？」須菩提說：「不能，世尊！為什麼呢？斯陀含的意思是『一往來』，但實際上並沒有真實的往來可執，這才叫做斯陀含。」"
+  },
+  {
+    original: "「須菩提！於意云何？阿那含能作是念『我得阿那含果』不？」須菩提言：「不也，世尊！何以故？阿那含名為不來，而實無不來，是故名阿那含。」",
+    translation: "「須菩提！你認為如何？阿那含（三果聖人，不再來欲界受生）能生起『我已得阿那含果』的念頭嗎？」須菩提說：「不能，世尊！為什麼呢？阿那含的意思是『不來』，但實際上並沒有一個『不來』的相可以執取，所以才叫做阿那含。」"
+  },
+  {
+    original: "「須菩提！於意云何？阿羅漢能作是念『我得阿羅漢道』不？」須菩提言：「不也，世尊！何以故？實無有法名阿羅漢。",
+    translation: "「須菩提！你認為如何？阿羅漢（四果聖人，斷盡煩惱，不再輪迴）能生起『我已得阿羅漢道』的念頭嗎？」須菩提說：「不能，世尊！為什麼呢？實際上並沒有一個固定的法可以稱為阿羅漢。"
+  },
+  {
+    original: "世尊！若阿羅漢作是念『我得阿羅漢道』，即為著我人眾生壽者。",
+    translation: "世尊！如果阿羅漢生起了『我已得阿羅漢道』這個念頭，他就是執著於我相、人相、眾生相、壽者相了，就不是真正的阿羅漢了。"
+  },
+  {
+    original: "世尊！佛說我得無諍三昧，人中最為第一，是第一離欲阿羅漢。世尊！我不作是念『我是離欲阿羅漢』。",
+    translation: "世尊！佛說我（須菩提）得到了無諍三昧（不與人諍論的禪定境界），在僧眾中是第一，是第一離欲的阿羅漢。但世尊！我並不生起『我是離欲阿羅漢』這個念頭。"
+  },
+  {
+    original: "世尊！我若作是念『我得阿羅漢道』，世尊則不說須菩提是樂阿蘭那行者。以須菩提實無所行，而名須菩提是樂阿蘭那行。」",
+    translation: "世尊！如果我生起了『我已得阿羅漢道』的念頭，世尊就不會說須菩提是喜愛阿蘭那（寂靜無諍）行的人了。正是因為須菩提實際上沒有任何執著的行，所以才稱須菩提為喜愛阿蘭那行的人。」（真正的修行，是連『我在修行』的念頭都沒有。）"
+  }
+];
+
+function renderOriginal() {
+  const container = document.getElementById('originalText');
+  verses.forEach((v, i) => {
+    const span = document.createElement('span');
+    span.className = 'sentence';
+    span.textContent = v.original;
+    span.addEventListener('click', (e) => { e.stopPropagation(); selectVerse(i); });
+    container.appendChild(span);
+  });
+}
+
+function selectVerse(index) {
+  document.querySelectorAll('.sentence').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.sentence')[index].classList.add('active');
+  const area = document.getElementById('translationArea');
+  area.innerHTML = `
+    <div class="translation-box">
+      <div class="original-ref">原文：${verses[index].original}</div>
+      <div class="divider">✦</div>
+      <div class="translation-text">${verses[index].translation}</div>
+    </div>
+  `;
+}
+
+document.addEventListener('click', (e) => {
+  if (!e.target.classList.contains('sentence') && !e.target.closest('#translationArea')) {
+    document.querySelectorAll('.sentence').forEach(s => s.classList.remove('active'));
+    document.getElementById('translationArea').innerHTML = '<p class="hint">請點擊左側原文中的任何一句，此處即顯示對應的白話解釋。</p>';
+  }
+});
+
+renderOriginal();
+</script>
+</body>
+</html>
