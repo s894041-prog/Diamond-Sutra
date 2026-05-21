@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>金剛經 第二品 善現啟請分</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;700&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Noto Serif TC', serif; background: #f5f0e8; min-height: 100vh; color: #2c1a0e; }
+  .header { text-align: center; padding: 30px 20px 20px; border-bottom: 2px solid rgba(140,100,50,0.3); background: rgba(255,250,240,0.9); }
+  .header h1 { font-size: 1.5em; color: #6b3d1e; letter-spacing: 0.3em; margin-bottom: 6px; }
+  .header p { font-size: 0.8em; color: #9a7a5a; letter-spacing: 0.15em; }
+  .nav { display: flex; justify-content: center; gap: 20px; padding: 12px; background: rgba(255,248,235,0.9); border-bottom: 1px solid rgba(140,100,50,0.15); }
+  .nav a { font-size: 0.8em; color: #9a7a5a; text-decoration: none; letter-spacing: 0.1em; padding: 4px 12px; border: 1px solid rgba(140,100,50,0.3); border-radius: 20px; transition: all 0.2s; }
+  .nav a:hover { background: rgba(180,140,60,0.15); color: #6b3d1e; }
+  .main { display: grid; grid-template-columns: 1fr 1fr; max-width: 1000px; margin: 0 auto; min-height: calc(100vh - 140px); }
+  .left-panel { padding: 30px 25px; border-right: 1px solid rgba(140,100,50,0.25); }
+  .right-panel { padding: 30px 25px; background: rgba(255,252,245,0.5); }
+  .panel-title { font-size: 0.75em; letter-spacing: 0.3em; color: #9a7a5a; margin-bottom: 20px; padding-bottom: 8px; border-bottom: 1px solid rgba(140,100,50,0.2); }
+  .sentence { display: inline; cursor: pointer; line-height: 2.4; font-size: 1em; letter-spacing: 0.05em; transition: background 0.2s; border-radius: 3px; padding: 1px 2px; }
+  .sentence:hover { background: rgba(180,140,60,0.15); }
+  .sentence.active { background: rgba(180,140,60,0.28); color: #6b3d1e; font-weight: 700; }
+  .translation-box { animation: fadeIn 0.4s ease; }
+  @keyframes fadeIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+  .original-ref { font-size: 0.75em; color: #9a7a5a; margin-bottom: 12px; letter-spacing: 0.08em; padding: 6px 10px; background: rgba(180,140,60,0.1); border-left: 3px solid #c8a050; border-radius: 0 4px 4px 0; }
+  .translation-text { font-size: 0.95em; line-height: 2.2; color: #3d2410; letter-spacing: 0.05em; }
+  .hint { color: #b8956a; font-size: 0.85em; line-height: 2.2; letter-spacing: 0.08em; font-style: italic; }
+  .divider { text-align: center; color: rgba(140,100,50,0.4); margin: 12px 0; letter-spacing: 0.5em; }
+  @media (max-width: 600px) { .main { grid-template-columns: 1fr; } .left-panel { border-right: none; border-bottom: 1px solid rgba(140,100,50,0.25); } .nav { flex-wrap: wrap; gap: 10px; } .right-panel { min-height: 300px; } }
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>金剛般若波羅蜜經</h1>
+  <p>第二品　善現啟請分　｜　點擊原文句子，右側顯示白話翻譯</p>
+</div>
+<div class="nav">
+  <a href="Diamond Sutra1.html">← 第一品</a>
+  <a href="#">第二品（目前）</a>
+  <a href="Diamond Sutra3.html">第三品 →</a>
+</div>
+<div class="main">
+  <div class="left-panel">
+    <div class="panel-title">原　文（鳩摩羅什譯）</div>
+    <div id="originalText"></div>
+  </div>
+  <div class="right-panel">
+    <div class="panel-title">白話翻譯</div>
+    <div id="translationArea">
+      <p class="hint">請點擊左側原文中的任何一句，此處即顯示對應的白話解釋。</p>
+    </div>
+  </div>
+</div>
+<script>
+const verses = [
+  {
+    original: "時，長老須菩提在大眾中即從座起，偏袒右肩，右膝著地，合掌恭敬而白佛言：",
+    translation: "這時候，長老須菩提在大眾之中，立刻從座位上起身，袒露右肩（印度表示恭敬的禮儀），右膝跪地，雙手合掌，恭敬地向佛說道："
+  },
+  {
+    original: "「希有！世尊！如來善護念諸菩薩，善付囑諸菩薩。",
+    translation: "「太稀有了！世尊！如來非常善於護念、照顧諸菩薩，也非常善於叮嚀、囑咐諸菩薩。"
+  },
+  {
+    original: "世尊！善男子、善女人，發阿耨多羅三藐三菩提心，應云何住？云何降伏其心？」",
+    translation: "世尊！那些善男子、善女人，若發起了追求無上正等正覺（成佛）的心，應當怎樣安住這顆心？又應當怎樣降伏、調伏這顆妄心呢？」"
+  },
+  {
+    original: "佛言：「善哉，善哉。須菩提！如汝所說，如來善護念諸菩薩，善付囑諸菩薩。",
+    translation: "佛說：「很好，很好！須菩提！正如你所說的，如來善於護念諸菩薩，善於付囑諸菩薩。"
+  },
+  {
+    original: "汝今諦聽！當為汝說：善男子、善女人，發阿耨多羅三藐三菩提心，應如是住，如是降伏其心。」",
+    translation: "你現在仔細聆聽！我將為你解說：善男子、善女人，發起無上正等正覺之心，應當這樣安住，這樣降伏自己的心。」"
+  },
+  {
+    original: "「唯然，世尊！願樂欲聞。」",
+    translation: "須菩提說：「是的，世尊！我們非常樂意聆聽。」（這是全經核心問題的提出：心如何安住？妄念如何降伏？佛陀接下來用整部經來回答。）"
+  }
+];
+
+function renderOriginal() {
+  const container = document.getElementById('originalText');
+  verses.forEach((v, i) => {
+    const span = document.createElement('span');
+    span.className = 'sentence';
+    span.textContent = v.original;
+    span.addEventListener('click', (e) => { e.stopPropagation(); selectVerse(i); });
+    container.appendChild(span);
+  });
+}
+
+function selectVerse(index) {
+  document.querySelectorAll('.sentence').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.sentence')[index].classList.add('active');
+  const area = document.getElementById('translationArea');
+  area.innerHTML = `
+    <div class="translation-box">
+      <div class="original-ref">原文：${verses[index].original}</div>
+      <div class="divider">✦</div>
+      <div class="translation-text">${verses[index].translation}</div>
+    </div>
+  `;
+}
+
+document.addEventListener('click', (e) => {
+  if (!e.target.classList.contains('sentence') && !e.target.closest('#translationArea')) {
+    document.querySelectorAll('.sentence').forEach(s => s.classList.remove('active'));
+    document.getElementById('translationArea').innerHTML = '<p class="hint">請點擊左側原文中的任何一句，此處即顯示對應的白話解釋。</p>';
+  }
+});
+
+renderOriginal();
+</script>
+</body>
+</html>
