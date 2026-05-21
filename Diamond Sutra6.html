@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>金剛經 第六品 正信希有分</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;700&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Noto Serif TC', serif; background: #f5f0e8; min-height: 100vh; color: #2c1a0e; }
+  .header { text-align: center; padding: 30px 20px 20px; border-bottom: 2px solid rgba(140,100,50,0.3); background: rgba(255,250,240,0.9); }
+  .header h1 { font-size: 1.5em; color: #6b3d1e; letter-spacing: 0.3em; margin-bottom: 6px; }
+  .header p { font-size: 0.8em; color: #9a7a5a; letter-spacing: 0.15em; }
+  .nav { display: flex; justify-content: center; gap: 20px; padding: 12px; background: rgba(255,248,235,0.9); border-bottom: 1px solid rgba(140,100,50,0.15); }
+  .nav a { font-size: 0.8em; color: #9a7a5a; text-decoration: none; letter-spacing: 0.1em; padding: 4px 12px; border: 1px solid rgba(140,100,50,0.3); border-radius: 20px; transition: all 0.2s; }
+  .nav a:hover { background: rgba(180,140,60,0.15); color: #6b3d1e; }
+  .main { display: grid; grid-template-columns: 1fr 1fr; max-width: 1000px; margin: 0 auto; min-height: calc(100vh - 140px); }
+  .left-panel { padding: 30px 25px; border-right: 1px solid rgba(140,100,50,0.25); }
+  .right-panel { padding: 30px 25px; background: rgba(255,252,245,0.5); }
+  .panel-title { font-size: 0.75em; letter-spacing: 0.3em; color: #9a7a5a; margin-bottom: 20px; padding-bottom: 8px; border-bottom: 1px solid rgba(140,100,50,0.2); }
+  .sentence { display: inline; cursor: pointer; line-height: 2.4; font-size: 1em; letter-spacing: 0.05em; transition: background 0.2s; border-radius: 3px; padding: 1px 2px; }
+  .sentence:hover { background: rgba(180,140,60,0.15); }
+  .sentence.active { background: rgba(180,140,60,0.28); color: #6b3d1e; font-weight: 700; }
+  .translation-box { animation: fadeIn 0.4s ease; }
+  @keyframes fadeIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+  .original-ref { font-size: 0.75em; color: #9a7a5a; margin-bottom: 12px; letter-spacing: 0.08em; padding: 6px 10px; background: rgba(180,140,60,0.1); border-left: 3px solid #c8a050; border-radius: 0 4px 4px 0; }
+  .translation-text { font-size: 0.95em; line-height: 2.2; color: #3d2410; letter-spacing: 0.05em; }
+  .hint { color: #b8956a; font-size: 0.85em; line-height: 2.2; letter-spacing: 0.08em; font-style: italic; }
+  .divider { text-align: center; color: rgba(140,100,50,0.4); margin: 12px 0; letter-spacing: 0.5em; }
+  @media (max-width: 600px) { .main { grid-template-columns: 1fr; } .left-panel { border-right: none; border-bottom: 1px solid rgba(140,100,50,0.25); } .nav { flex-wrap: wrap; gap: 10px; } .right-panel { min-height: 300px; } }
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>金剛般若波羅蜜經</h1>
+  <p>第六品　正信希有分　｜　點擊原文句子，右側顯示白話翻譯</p>
+</div>
+<div class="nav">
+  <a href="Diamond Sutra5.html">← 第五品</a>
+  <a href="#">第六品（目前）</a>
+  <a href="Diamond Sutra7.html">第七品 →</a>
+</div>
+<div class="main">
+  <div class="left-panel">
+    <div class="panel-title">原　文（鳩摩羅什譯）</div>
+    <div id="originalText"></div>
+  </div>
+  <div class="right-panel">
+    <div class="panel-title">白話翻譯</div>
+    <div id="translationArea">
+      <p class="hint">請點擊左側原文中的任何一句，此處即顯示對應的白話解釋。</p>
+    </div>
+  </div>
+</div>
+<script>
+const verses = [
+  {
+    original: "須菩提白佛言：「世尊！頗有眾生，得聞如是言說章句，生實信不？」",
+    translation: "須菩提問佛說：「世尊！在未來，真的會有眾生，聽到這樣深奧的經文，能夠生起真實的信心嗎？」"
+  },
+  {
+    original: "佛告須菩提：「莫作是說。如來滅後，後五百歲，有持戒修福者，於此章句能生信心，以此為實，",
+    translation: "佛告訴須菩提：「不要這樣說。如來滅度之後，到了末後五百年，若有持守戒律、修積福德的人，對這部經的章句能夠生起信心，認為這是真實的，"
+  },
+  {
+    original: "當知是人不於一佛二佛三四五佛而種善根，已於無量千萬佛所種諸善根，",
+    translation: "應當知道這樣的人，不只是在一尊、兩尊、三四五尊佛那裡種下善根，而是已經在無量千萬尊佛那裡種下了深厚的善根，"
+  },
+  {
+    original: "聞是章句，乃至一念生淨信者，須菩提！如來悉知悉見，是諸眾生得如是無量福德。",
+    translation: "他們聽聞這部經的章句，乃至只生起一念清淨的信心，須菩提！如來全都了知、全都看見，這些眾生將得到如此無量的福德。"
+  },
+  {
+    original: "何以故？是諸眾生無復我相、人相、眾生相、壽者相；無法相，亦無非法相。",
+    translation: "為什麼呢？因為這些眾生不再執著於我相、人相、眾生相、壽者相；不執著於法相（不執著有法可得），也不執著於非法相（不執著什麼都沒有）。"
+  },
+  {
+    original: "何以故？是諸眾生若心取相，則為著我人眾生壽者。若取法相，即著我人眾生壽者。若取非法相，即著我人眾生壽者。",
+    translation: "為什麼呢？這些眾生若心中執取任何相，就是執著於我、人、眾生、壽者四相。若執取法相，也是執著於四相。若執取非法相，同樣是執著於四相。（執著什麼都是執著，都是障礙。）"
+  },
+  {
+    original: "是故不應取法，不應取非法。以是義故，如來常說：汝等比丘，知我說法，如筏喻者；法尚應捨，何況非法。」",
+    translation: "所以不應執取法，也不應執取非法。正因如此，如來常常說：你們這些比丘，應當知道，我所說的法，就像渡河用的木筏一樣；到了對岸就要捨棄木筏，連法都應當放下，何況是非法呢？」（著名的「筏喻」：法是工具，不是目的。）"
+  }
+];
+
+function renderOriginal() {
+  const container = document.getElementById('originalText');
+  verses.forEach((v, i) => {
+    const span = document.createElement('span');
+    span.className = 'sentence';
+    span.textContent = v.original;
+    span.addEventListener('click', (e) => { e.stopPropagation(); selectVerse(i); });
+    container.appendChild(span);
+  });
+}
+
+function selectVerse(index) {
+  document.querySelectorAll('.sentence').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.sentence')[index].classList.add('active');
+  const area = document.getElementById('translationArea');
+  area.innerHTML = `
+    <div class="translation-box">
+      <div class="original-ref">原文：${verses[index].original}</div>
+      <div class="divider">✦</div>
+      <div class="translation-text">${verses[index].translation}</div>
+    </div>
+  `;
+}
+
+document.addEventListener('click', (e) => {
+  if (!e.target.classList.contains('sentence') && !e.target.closest('#translationArea')) {
+    document.querySelectorAll('.sentence').forEach(s => s.classList.remove('active'));
+    document.getElementById('translationArea').innerHTML = '<p class="hint">請點擊左側原文中的任何一句，此處即顯示對應的白話解釋。</p>';
+  }
+});
+
+renderOriginal();
+</script>
+</body>
+</html>
