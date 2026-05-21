@@ -53,9 +53,29 @@
   .translation-text { font-size: 0.95em; line-height: 2.2; color: #3d2410; letter-spacing: 0.05em; }
   .hint { color: #b8956a; font-size: 0.85em; line-height: 2.2; letter-spacing: 0.08em; font-style: italic; }
   .divider { text-align: center; color: rgba(140,100,50,0.4); margin: 12px 0; letter-spacing: 0.5em; }
+  .nav {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 12px;
+    background: rgba(255,248,235,0.9);
+    border-bottom: 1px solid rgba(140,100,50,0.15);
+  }
+  .nav a {
+    font-size: 0.8em;
+    color: #9a7a5a;
+    text-decoration: none;
+    letter-spacing: 0.1em;
+    padding: 4px 12px;
+    border: 1px solid rgba(140,100,50,0.3);
+    border-radius: 20px;
+    transition: all 0.2s;
+  }
+  .nav a:hover { background: rgba(180,140,60,0.15); color: #6b3d1e; }
   @media (max-width: 600px) {
     .main { grid-template-columns: 1fr; }
     .left-panel { border-right: none; border-bottom: 1px solid rgba(140,100,50,0.25); }
+    .nav { flex-wrap: wrap; gap: 10px; }
   }
 </style>
 </head>
@@ -63,6 +83,11 @@
 <div class="header">
   <h1>金剛般若波羅蜜經</h1>
   <p>第十四品　離相寂滅分　｜　點擊原文句子，右側顯示白話翻譯</p>
+</div>
+<div class="nav">
+  <a href="Diamond Sutra13.html">← 第十三品</a>
+  <a href="#">第十四品（目前）</a>
+  <a href="Diamond Sutra15.html">第十五品 →</a>
 </div>
 <div class="main">
   <div class="left-panel">
