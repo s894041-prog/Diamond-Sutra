@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>金剛經 第八品 依法出生分</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;700&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Noto Serif TC', serif; background: #f5f0e8; min-height: 100vh; color: #2c1a0e; }
+  .header { text-align: center; padding: 30px 20px 20px; border-bottom: 2px solid rgba(140,100,50,0.3); background: rgba(255,250,240,0.9); }
+  .header h1 { font-size: 1.5em; color: #6b3d1e; letter-spacing: 0.3em; margin-bottom: 6px; }
+  .header p { font-size: 0.8em; color: #9a7a5a; letter-spacing: 0.15em; }
+  .nav { display: flex; justify-content: center; gap: 20px; padding: 12px; background: rgba(255,248,235,0.9); border-bottom: 1px solid rgba(140,100,50,0.15); }
+  .nav a { font-size: 0.8em; color: #9a7a5a; text-decoration: none; letter-spacing: 0.1em; padding: 4px 12px; border: 1px solid rgba(140,100,50,0.3); border-radius: 20px; transition: all 0.2s; }
+  .nav a:hover { background: rgba(180,140,60,0.15); color: #6b3d1e; }
+  .main { display: grid; grid-template-columns: 1fr 1fr; max-width: 1000px; margin: 0 auto; min-height: calc(100vh - 140px); }
+  .left-panel { padding: 30px 25px; border-right: 1px solid rgba(140,100,50,0.25); }
+  .right-panel { padding: 30px 25px; background: rgba(255,252,245,0.5); }
+  .panel-title { font-size: 0.75em; letter-spacing: 0.3em; color: #9a7a5a; margin-bottom: 20px; padding-bottom: 8px; border-bottom: 1px solid rgba(140,100,50,0.2); }
+  .sentence { display: inline; cursor: pointer; line-height: 2.4; font-size: 1em; letter-spacing: 0.05em; transition: background 0.2s; border-radius: 3px; padding: 1px 2px; }
+  .sentence:hover { background: rgba(180,140,60,0.15); }
+  .sentence.active { background: rgba(180,140,60,0.28); color: #6b3d1e; font-weight: 700; }
+  .translation-box { animation: fadeIn 0.4s ease; }
+  @keyframes fadeIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+  .original-ref { font-size: 0.75em; color: #9a7a5a; margin-bottom: 12px; letter-spacing: 0.08em; padding: 6px 10px; background: rgba(180,140,60,0.1); border-left: 3px solid #c8a050; border-radius: 0 4px 4px 0; }
+  .translation-text { font-size: 0.95em; line-height: 2.2; color: #3d2410; letter-spacing: 0.05em; }
+  .hint { color: #b8956a; font-size: 0.85em; line-height: 2.2; letter-spacing: 0.08em; font-style: italic; }
+  .divider { text-align: center; color: rgba(140,100,50,0.4); margin: 12px 0; letter-spacing: 0.5em; }
+  @media (max-width: 600px) { .main { grid-template-columns: 1fr; } .left-panel { border-right: none; border-bottom: 1px solid rgba(140,100,50,0.25); } .nav { flex-wrap: wrap; gap: 10px; } .right-panel { min-height: 300px; } }
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>金剛般若波羅蜜經</h1>
+  <p>第八品　依法出生分　｜　點擊原文句子，右側顯示白話翻譯</p>
+</div>
+<div class="nav">
+  <a href="Diamond Sutra7.html">← 第七品</a>
+  <a href="#">第八品（目前）</a>
+  <a href="Diamond Sutra9.html">第九品 →</a>
+</div>
+<div class="main">
+  <div class="left-panel">
+    <div class="panel-title">原　文（鳩摩羅什譯）</div>
+    <div id="originalText"></div>
+  </div>
+  <div class="right-panel">
+    <div class="panel-title">白話翻譯</div>
+    <div id="translationArea">
+      <p class="hint">請點擊左側原文中的任何一句，此處即顯示對應的白話解釋。</p>
+    </div>
+  </div>
+</div>
+<script>
+const verses = [
+  {
+    original: "「須菩提！於意云何？若人滿三千大千世界七寶以用布施，是人所得福德，寧為多不？」",
+    translation: "佛問：「須菩提！你認為如何？如果有人用裝滿三千大千世界（極其廣大的宇宙）的七種寶物（金、銀、琉璃、玻璃、硨磲、赤珠、瑪瑙）來布施，這個人所得到的福德，是不是很多呢？」"
+  },
+  {
+    original: "須菩提言：「甚多，世尊！何以故？是福德即非福德性，是故如來說福德多。」",
+    translation: "須菩提說：「非常多，世尊！為什麼呢？因為這種福德，其本質並非真實固定的福德性（它仍是有為的、有漏的），正因如此，如來才說它多。」（多，但不是最究竟的。）"
+  },
+  {
+    original: "「若復有人，於此經中受持，乃至四句偈等，為他人說，其福勝彼。",
+    translation: "「如果另有一人，對這部經中受持，哪怕只是四句偈語，並為他人講說，他所得的福德就超過前者用七寶布施所得的福德。"
+  },
+  {
+    original: "何以故？須菩提！一切諸佛，及諸佛阿耨多羅三藐三菩提法，皆從此經出。",
+    translation: "為什麼呢？須菩提！一切諸佛，以及諸佛所證的無上正等正覺之法，都是從這部經所流出的。（這部經是一切佛法的根源，故功德遠超世間財寶。）"
+  },
+  {
+    original: "須菩提！所謂佛法者，即非佛法。」",
+    translation: "須菩提！所謂的「佛法」，其實並不是固定不變的佛法。」（佛法是活的智慧，不是可以執取的固定教條，不能執著於「佛法」這個名相本身。）"
+  }
+];
+
+function renderOriginal() {
+  const container = document.getElementById('originalText');
+  verses.forEach((v, i) => {
+    const span = document.createElement('span');
+    span.className = 'sentence';
+    span.textContent = v.original;
+    span.addEventListener('click', (e) => { e.stopPropagation(); selectVerse(i); });
+    container.appendChild(span);
+  });
+}
+
+function selectVerse(index) {
+  document.querySelectorAll('.sentence').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.sentence')[index].classList.add('active');
+  const area = document.getElementById('translationArea');
+  area.innerHTML = `
+    <div class="translation-box">
+      <div class="original-ref">原文：${verses[index].original}</div>
+      <div class="divider">✦</div>
+      <div class="translation-text">${verses[index].translation}</div>
+    </div>
+  `;
+}
+
+document.addEventListener('click', (e) => {
+  if (!e.target.classList.contains('sentence') && !e.target.closest('#translationArea')) {
+    document.querySelectorAll('.sentence').forEach(s => s.classList.remove('active'));
+    document.getElementById('translationArea').innerHTML = '<p class="hint">請點擊左側原文中的任何一句，此處即顯示對應的白話解釋。</p>';
+  }
+});
+
+renderOriginal();
+</script>
+</body>
+</html>
