@@ -118,8 +118,14 @@ document.addEventListener('click', (e) => {
 renderOriginal();
 </script>
 
-<div style="text-align:center; padding: 20px; background: rgba(255,250,240,0.95); border-top: 1px solid rgba(140,100,50,0.2); font-family: 'Noto Serif TC', serif; font-size: 0.8em; color: #9a7a5a; letter-spacing: 0.15em;">
-  本頁瀏覽次數　<img src="https://visitor-badge.laobi.icu/badge?page_id=s894041-prog.DiamondSutra.ch6" alt="瀏覽次數" style="vertical-align:middle; border-radius:4px; height:22px;">
+<div style="text-align:center; padding: 20px 20px 24px; background: rgba(255,250,240,0.95); border-top: 1px solid rgba(140,100,50,0.2); font-family: 'Noto Serif TC', serif; font-size: 0.8em; color: #9a7a5a; letter-spacing: 0.2em;">
+  本頁瀏覽次數　<span id="view-count" style="color:#6b3d1e; font-size:1.1em; font-weight:700; letter-spacing:0.05em;">…</span>　次
 </div>
+<script>
+fetch('https://api.counterapi.dev/v1/DiamondSutra/ch6/up')
+  .then(r => r.json())
+  .then(d => { document.getElementById('view-count').textContent = d.count; })
+  .catch(() => { document.getElementById('view-count').textContent = '--'; });
+</script>
 </body>
 </html>
