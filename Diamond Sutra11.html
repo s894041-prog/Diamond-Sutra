@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>金剛經 第十一品 無為福勝分</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;700&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Noto Serif TC', serif; background: #f5f0e8; min-height: 100vh; color: #2c1a0e; }
+  .header { text-align: center; padding: 30px 20px 20px; border-bottom: 2px solid rgba(140,100,50,0.3); background: rgba(255,250,240,0.9); }
+  .header h1 { font-size: 1.5em; color: #6b3d1e; letter-spacing: 0.3em; margin-bottom: 6px; }
+  .header p { font-size: 0.8em; color: #9a7a5a; letter-spacing: 0.15em; }
+  .nav { display: flex; justify-content: center; gap: 20px; padding: 12px; background: rgba(255,248,235,0.9); border-bottom: 1px solid rgba(140,100,50,0.15); }
+  .nav a { font-size: 0.8em; color: #9a7a5a; text-decoration: none; letter-spacing: 0.1em; padding: 4px 12px; border: 1px solid rgba(140,100,50,0.3); border-radius: 20px; transition: all 0.2s; }
+  .nav a:hover { background: rgba(180,140,60,0.15); color: #6b3d1e; }
+  .main { display: grid; grid-template-columns: 1fr 1fr; max-width: 1000px; margin: 0 auto; min-height: calc(100vh - 140px); }
+  .left-panel { padding: 30px 25px; border-right: 1px solid rgba(140,100,50,0.25); }
+  .right-panel { padding: 30px 25px; background: rgba(255,252,245,0.5); }
+  .panel-title { font-size: 0.75em; letter-spacing: 0.3em; color: #9a7a5a; margin-bottom: 20px; padding-bottom: 8px; border-bottom: 1px solid rgba(140,100,50,0.2); }
+  .sentence { display: inline; cursor: pointer; line-height: 2.4; font-size: 1em; letter-spacing: 0.05em; transition: background 0.2s; border-radius: 3px; padding: 1px 2px; }
+  .sentence:hover { background: rgba(180,140,60,0.15); }
+  .sentence.active { background: rgba(180,140,60,0.28); color: #6b3d1e; font-weight: 700; }
+  .translation-box { animation: fadeIn 0.4s ease; }
+  @keyframes fadeIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+  .original-ref { font-size: 0.75em; color: #9a7a5a; margin-bottom: 12px; letter-spacing: 0.08em; padding: 6px 10px; background: rgba(180,140,60,0.1); border-left: 3px solid #c8a050; border-radius: 0 4px 4px 0; }
+  .translation-text { font-size: 0.95em; line-height: 2.2; color: #3d2410; letter-spacing: 0.05em; }
+  .hint { color: #b8956a; font-size: 0.85em; line-height: 2.2; letter-spacing: 0.08em; font-style: italic; }
+  .divider { text-align: center; color: rgba(140,100,50,0.4); margin: 12px 0; letter-spacing: 0.5em; }
+  @media (max-width: 600px) { .main { grid-template-columns: 1fr; } .left-panel { border-right: none; border-bottom: 1px solid rgba(140,100,50,0.25); } .nav { flex-wrap: wrap; gap: 10px; } .right-panel { min-height: 300px; } }
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>金剛般若波羅蜜經</h1>
+  <p>第十一品　無為福勝分　｜　點擊原文句子，右側顯示白話翻譯</p>
+</div>
+<div class="nav">
+  <a href="Diamond Sutra10.html">← 第十品</a>
+  <a href="#">第十一品（目前）</a>
+  <a href="Diamond Sutra12.html">第十二品 →</a>
+</div>
+<div class="main">
+  <div class="left-panel">
+    <div class="panel-title">原　文（鳩摩羅什譯）</div>
+    <div id="originalText"></div>
+  </div>
+  <div class="right-panel">
+    <div class="panel-title">白話翻譯</div>
+    <div id="translationArea">
+      <p class="hint">請點擊左側原文中的任何一句，此處即顯示對應的白話解釋。</p>
+    </div>
+  </div>
+</div>
+<script>
+const verses = [
+  {
+    original: "「須菩提！如恒河中所有沙數，如是沙等恒河，於意云何？是諸恒河沙寧為多不？」",
+    translation: "佛說：「須菩提！如果以恆河中所有的沙粒數目，每一粒沙代表一條恆河，你認為如何？這所有恆河的沙，是不是非常多？」（以無數恆河的沙來比喻極大的數量。）"
+  },
+  {
+    original: "須菩提言：「甚多，世尊！但諸恒河尚多無數，何況其沙。」",
+    translation: "須菩提說：「非常多，世尊！光是這些恆河就已經多到無法計算，更何況是這麼多恆河裡所有的沙粒呢！」"
+  },
+  {
+    original: "「須菩提！我今實言告汝：若有善男子、善女人，以七寶滿爾所恒河沙數三千大千世界，以用布施，得福多不？」須菩提言：「甚多，世尊！」",
+    translation: "「須菩提！我現在如實地告訴你：如果有善男子、善女人，用七種珍寶裝滿那麼多恆河沙數量的三千大千世界，用來布施，所得的福德多不多？」須菩提說：「非常多，世尊！」"
+  },
+  {
+    original: "佛告須菩提：「若善男子、善女人，於此經中，乃至受持四句偈等，為他人說，而此福德勝前福德。」",
+    translation: "佛告訴須菩提：「如果有善男子、善女人，對於這部經，哪怕只是受持四句偈，並為他人講說，這樣所得的福德就遠遠超過前面用七寶布施所得的福德。」（智慧的布施，勝過一切財寶的布施。）"
+  }
+];
+
+function renderOriginal() {
+  const container = document.getElementById('originalText');
+  verses.forEach((v, i) => {
+    const span = document.createElement('span');
+    span.className = 'sentence';
+    span.textContent = v.original;
+    span.addEventListener('click', (e) => { e.stopPropagation(); selectVerse(i); });
+    container.appendChild(span);
+  });
+}
+
+function selectVerse(index) {
+  document.querySelectorAll('.sentence').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.sentence')[index].classList.add('active');
+  const area = document.getElementById('translationArea');
+  area.innerHTML = `
+    <div class="translation-box">
+      <div class="original-ref">原文：${verses[index].original}</div>
+      <div class="divider">✦</div>
+      <div class="translation-text">${verses[index].translation}</div>
+    </div>
+  `;
+}
+
+document.addEventListener('click', (e) => {
+  if (!e.target.classList.contains('sentence') && !e.target.closest('#translationArea')) {
+    document.querySelectorAll('.sentence').forEach(s => s.classList.remove('active'));
+    document.getElementById('translationArea').innerHTML = '<p class="hint">請點擊左側原文中的任何一句，此處即顯示對應的白話解釋。</p>';
+  }
+});
+
+renderOriginal();
+</script>
+</body>
+</html>
