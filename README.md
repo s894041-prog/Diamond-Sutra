@@ -39,7 +39,22 @@
 | 第十四品 | 離相寂滅分 | [閱讀](https://s894041-prog.github.io/Diamond-Sutra/Diamond%20Sutra14.html) |
 | 第十五品 | 持經功德分 | [閱讀](https://s894041-prog.github.io/Diamond-Sutra/Diamond%20Sutra15.html) |
 | 第十六品 | 能淨業障分 | [閱讀](https://s894041-prog.github.io/Diamond-Sutra/Diamond%20Sutra16.html) |
-| 第十七～三十二品 | 陸續製作中… | — |
+| 第十七品 | 究竟無我分 | [閱讀](https://s894041-prog.github.io/Diamond-Sutra/Diamond%20Sutra17.html) |
+| 第十八品 | 一體同觀分 | [閱讀](https://s894041-prog.github.io/Diamond-Sutra/Diamond%20Sutra18.html) |
+| 第十九品 | 法界通化分 | [閱讀](https://s894041-prog.github.io/Diamond-Sutra/Diamond%20Sutra19.html) |
+| 第二十品 | 離色離相分 | [閱讀](https://s894041-prog.github.io/Diamond-Sutra/Diamond%20Sutra20.html) |
+| 第二十一品 | 非說所說分 | [閱讀](https://s894041-prog.github.io/Diamond-Sutra/Diamond%20Sutra21.html) |
+| 第二十二品 | 無法可得分 | [閱讀](https://s894041-prog.github.io/Diamond-Sutra/Diamond%20Sutra22.html) |
+| 第二十三品 | 淨心行善分 | [閱讀](https://s894041-prog.github.io/Diamond-Sutra/Diamond%20Sutra23.html) |
+| 第二十四品 | 福智無比分 | [閱讀](https://s894041-prog.github.io/Diamond-Sutra/Diamond%20Sutra24.html) |
+| 第二十五品 | 化無所化分 | [閱讀](https://s894041-prog.github.io/Diamond-Sutra/Diamond%20Sutra25.html) |
+| 第二十六品 | 法身非相分 | [閱讀](https://s894041-prog.github.io/Diamond-Sutra/Diamond%20Sutra26.html) |
+| 第二十七品 | 無斷無滅分 | [閱讀](https://s894041-prog.github.io/Diamond-Sutra/Diamond%20Sutra27.html) |
+| 第二十八品 | 不受不貪分 | [閱讀](https://s894041-prog.github.io/Diamond-Sutra/Diamond%20Sutra28.html) |
+| 第二十九品 | 威儀寂靜分 | [閱讀](https://s894041-prog.github.io/Diamond-Sutra/Diamond%20Sutra29.html) |
+| 第三十品 | 一合理相分 | [閱讀](https://s894041-prog.github.io/Diamond-Sutra/Diamond%20Sutra30.html) |
+| 第三十一品 | 知見不生分 | [閱讀](https://s894041-prog.github.io/Diamond-Sutra/Diamond%20Sutra31.html) |
+| 第三十二品 | 應化非真分 | [閱讀](https://s894041-prog.github.io/Diamond-Sutra/Diamond%20Sutra32.html) |
 
 ---
 
@@ -66,7 +81,7 @@
 
 - 譯本：鳩摩羅什版（公元401年），全文公開領域
 - 白話翻譯：依各品義理重新以現代中文詮釋
-- 逐步更新中，歡迎持續回來閱讀
+- 全32品已完整上線
 
 ---
 
